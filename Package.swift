@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     
-    name      : "async_pulse_ox",
+    name      : "swift-async_pulse_ox",
     platforms : [ .iOS("15.2") ],
     products  :
         [
@@ -15,9 +15,9 @@ let package = Package(
         ],
     dependencies:
         [
-            .package(url: "https://github.com/maurovm/sensor_recording_utils", .branch("master")),
-            .package(url: "https://github.com/maurovm/async_bluetooth", .branch("master")),
-.package(url: "https://github.com/maurovm/waveform_plotter", .branch("master"))
+            .package(url: "https://github.com/maurovm/swift-sensor_recording_utils", .branch("master")),
+            .package(url: "https://github.com/maurovm/swift-async_bluetooth",        .branch("master")),
+            .package(url: "https://github.com/maurovm/swift-waveform_plotter",       .branch("master"))
         ],
     targets:
         [
@@ -25,9 +25,9 @@ let package = Package(
                 name         : "AsyncPulseOx",
                 dependencies : 
                     [
-                        .product(name: "SensorRecordingUtils", package: "sensor_recording_utils"),
-                        .product(name: "AsyncBluetooth",       package: "async_bluetooth"),
-                        .product(name: "WaveformPlotter",      package: "waveform_plotter")
+                        .product(name: "SensorRecordingUtils", package: "swift-sensor_recording_utils"),
+                        .product(name: "AsyncBluetooth",       package: "swift-async_bluetooth"),
+                        .product(name: "WaveformPlotter",      package: "swift-waveform_plotter")
                     ],
                 path         : "Sources"
             )
