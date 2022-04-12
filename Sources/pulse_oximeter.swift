@@ -319,7 +319,7 @@ final actor Pulse_oximeter
         }
         else
         {
-            throw Device.Recording_error.failed_to_start(
+            throw Device.Start_recording_error.failed_to_start(
                 device_id  : device_identifier,
                 description: "Couldn't not subscribe to notifications for " +
                              "characteristic \(characteristic_id)"
@@ -344,7 +344,7 @@ final actor Pulse_oximeter
         }
         else
         {
-            throw Device.Recording_error.failed_to_stop(
+            throw Device.Stop_recording_error.failed_to_stop(
                 device_id  : device_identifier,
                 description: "Couldn't not unsubscribe to notifications for " +
                              "characteristic \(characteristic_id)"

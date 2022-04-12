@@ -154,13 +154,13 @@ final actor BLE_notifications_writer
                 output_file_handle = nil
                 is_recording = false
             }
-            catch let error as Device.Recording_error
+            catch let error as Device.Stop_recording_error
             {
                 throw error
             }
             catch
             {
-                throw Device.Recording_error.failed_to_stop(
+                throw Device.Stop_recording_error.failed_to_stop(
                     device_id  : device_identifier,
                     description: "Couldn't not unsubscrebe to notifications " +
                                  "for characteristic '\(decoder.id)'"

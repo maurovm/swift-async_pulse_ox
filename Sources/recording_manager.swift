@@ -47,6 +47,7 @@ public final class Recording_manager : Device_manager
         
         super.init(
                 identifier   : device_id,
+                sensor_type  : .pulse_oximeter,
                 settings     : self.settings,
                 orientation  : orientation,
                 preview_mode : preview_mode,
@@ -61,7 +62,7 @@ public final class Recording_manager : Device_manager
             orientation  : UIDeviceOrientation,
             preview_mode : Device.Content_mode,
             device_state : Device.Recording_state,
-            connection_timeout : Double,
+            connection_timeout        : Double,
             vital_signs_display_model : Vital_sign_numerics_model? = nil
         )
     {
@@ -168,13 +169,13 @@ public final class Recording_manager : Device_manager
         {
             try await start_data_writers()
         }
-        catch let error as Device.Recording_error
+        catch let error as Device.Start_recording_error
         {
             throw error
         }
         catch
         {
-            throw  Device.Recording_error.failed_to_start(
+            throw  Device.Start_recording_error.failed_to_start(
                     device_id   : identifier,
                     description : "Unhandled error while " +
                                   "starting to data writers: " +
@@ -490,13 +491,13 @@ public final class Recording_manager : Device_manager
                         try await writer.start()
                         is_started = true
                     }
-                    catch let error as Device.Recording_error
+                    catch let error as Device.Start_recording_error
                     {
                         throw error
                     }
                     catch
                     {
-                        throw  Device.Recording_error.failed_to_start(
+                        throw  Device.Start_recording_error.failed_to_start(
                                 device_id   : device_id,
                                 description : "Unhandled error while " +
                                           "starting data writer " +
@@ -527,7 +528,7 @@ public final class Recording_manager : Device_manager
         
         if (number_of_started_writer != all_data_writers.values.count)
         {
-            throw Device.Recording_error.failed_to_start_from_all_devices
+            throw Device.Start_recording_error.failed_to_start_from_all_devices
         }
         
     }
@@ -536,7 +537,7 @@ public final class Recording_manager : Device_manager
     private func stop_data_writers() async throws
     {
         
-        var stop_error : Device.Recording_error? = nil
+        var stop_error : Device.Stop_recording_error? = nil
         
         for writer in all_data_writers.values
         {
@@ -546,13 +547,13 @@ public final class Recording_manager : Device_manager
             {
                 try await writer.stop()
             }
-            catch let error as Device.Recording_error
+            catch let error as Device.Stop_recording_error
             {
                 stop_error = error
             }
             catch
             {
-                stop_error = Device.Recording_error.failed_to_stop(
+                stop_error = Device.Stop_recording_error.failed_to_stop(
                         device_id   : identifier,
                         description : "Unhandled error while " +
                                       "stopping data writer " +
@@ -581,6 +582,7 @@ public final class Recording_manager : Device_manager
         {
             subscription.cancel()
         }
+        
         vital_signs_display_subscriptions.removeAll()
         
     }
@@ -593,6 +595,7 @@ public final class Recording_manager : Device_manager
         {
             subscription.cancel()
         }
+        
         bluetooth_event_subscriptions.removeAll()
         
     }
