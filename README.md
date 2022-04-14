@@ -6,10 +6,16 @@ monitors and pulse oximeters. Examples of supported time-series are heart rate,
 peripheral oxygen saturation (SpO<sub>2</sub>), Photoplethysmogram (PPG), 
 battery status and more.
 
+---
+
 AsyncPulseOx is free software: you can redistribute it or modify it under the
 terms of the GNU General Public License as published by the Free Software 
 Foundation, version 2 only. Please check the file [COPYING](COPYING) for more
 information on the license and copyright.
+
+If you want to submit pull requests or contribute source code to this 
+repository, please read the [CONTRIBUTING.md](CONTRIBUTING.md) for
+more information about contributing guidelines.
 
 If you use this app in your projects and publish the results, please cite the
 following manuscript:
